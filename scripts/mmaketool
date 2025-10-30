@@ -215,7 +215,7 @@ kernelid() {
 }
 
 do-find-top() {
-  mytoppath=$(cd "$bin/.." && /bin/pwd)
+  mytoppath=$(cd "$bin/.." && /usr/bin/env pwd)
   if find-top; then
     # Check mmaketool is in same tree as working directory.
     [ "$mytoppath" = "$TOPPATH" ] ||
@@ -283,7 +283,7 @@ case "$1" in
 esac
 
 # Check mmaketool is in same tree as working directory.
-mytoppath=$(cd "$bin/.." && /bin/pwd)
+mytoppath=$(cd "$bin/.." && /usr/bin/env pwd)
 if $incitree; then
   [ "$mytoppath" = "$TOPPATH" ] ||
     fail "ERROR: Using mmaketool from $mytoppath in $TOPPATH."

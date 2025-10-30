@@ -4,7 +4,7 @@
 
 # Make build trees and compile.
 
-bin=$(cd $(dirname "$0") && /bin/pwd)
+bin=$(cd $(dirname "$0") && /usr/bin/env pwd)
 me=$(basename "$0")
 
 err()  { echo >&2 "$*"; }

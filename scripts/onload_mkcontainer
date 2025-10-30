@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 # X-SPDX-Copyright-Text: (c) Copyright 2023 Advanced Micro Devices, Inc.
 
-bin=$(cd "$(dirname "$0")" && /bin/pwd)
+bin=$(cd "$(dirname "$0")" && /usr/bin/env pwd)
 source "${bin}/lib/mkdist/utils"
 
 usage() {

@@ -6,7 +6,7 @@
 # transport.
 
 me=$(basename "$0")
-bin=$(cd "$(dirname "$0")" && /bin/pwd)
+bin=$(cd "$(dirname "$0")" && /usr/bin/env pwd)
 
 
 err()	{ echo >&2 "$*"; }
@@ -207,7 +207,7 @@ sfc_genwrapper() {	# Generate the preload wrapper script.
 	err "       PATH: \$PATH"
 	err "        PWD: \$PWD"
 	err "        pwd: \$(pwd)"
-	err "   /bin/pwd: \$(/bin/pwd)"
+	err "   /usr/bin/env pwd: \$(/usr/bin/env pwd)"
 	exit 1
 	EOF
 }
@@ -246,7 +246,7 @@ sfc_mkwrapper() {	# Choose where to put wrapper, and return its name.
 sfc_mkwrapper2() {	# Call mkwrapper with abs and rel paths to app.
   local app="$1"
   if [ "$app" = "${app#/}" ]; then
-    local abs1=$(sfc_mkappabsolute /bin/pwd "$app")
+    local abs1=$(sfc_mkappabsolute /usr/bin/env pwd "$app")
     local abs2=$(sfc_mkappabsolute pwd "$app")
     if [ "$abs1" = "$abs2" ]; then
       sfc_mkwrapper "$abs1" "$app"

@@ -4,7 +4,7 @@
 
 # Build and install openonload into system directories.
 
-bin=$(cd $(dirname "$0") && /bin/pwd)
+bin=$(cd $(dirname "$0") && /usr/bin/env pwd)
 me=$(basename "$0")
 
 err()  { echo >&2 "$*"; }
@@ -660,7 +660,7 @@ detect_lib64_path() {
 # main
 
 PATH="$bin:$PATH:/usr/sbin:/sbin"; export PATH
-TOP=$(cd "$bin/.." && /bin/pwd)
+TOP=$(cd "$bin/.." && /usr/bin/env pwd)
 
 buildargs=
 build=true

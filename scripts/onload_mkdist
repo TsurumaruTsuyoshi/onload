@@ -8,7 +8,7 @@
 # Author: David Riddoch
 ##############################################################################
 
-bin=$(cd $(dirname "$0") && /bin/pwd)
+bin=$(cd $(dirname "$0") && /usr/bin/env pwd)
 
 # Pull in definitions of try, err, etc.
 source "${bin}/lib/mkdist/utils"
