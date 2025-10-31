@@ -189,9 +189,9 @@ ifneq (,$(filter #TYPE#-source,$(DOPACKAGES)))
 
 	# Copy only the driver source to the proper location
 	if [ -f "debian/Makefile" ]; then \
-		cp debian/Makefile  debian/$(psource)/usr/src/modules/$(sname) \
+		cp debian/Makefile  debian/$(psource)/usr/src/modules/$(sname); \
 	else \
-		cp Makefile  debian/$(psource)/usr/src/modules/$(sname) \
+		cp Makefile  debian/$(psource)/usr/src/modules/$(sname); \
 	fi
 	cp -r src  debian/$(psource)/usr/src/modules/$(sname)
 	cp -r scripts  debian/$(psource)/usr/src/modules/$(sname)
@@ -212,7 +212,7 @@ ifneq (,$(filter #TYPE#-dkms,$(DOPACKAGES)))
 	dh_installdirs -p$(pdkms) usr/src/
 	tar xf ../#TYPE#_#VERSION#.orig.tar.gz -C debian/$(pdkms)/usr/src/
 	if [ -f "debian/Makefile" ]; then \
-		install -D -m 644 debian/Makefile debian/$(pdkms)/usr/src/#TYPE#-#VERSION#/Makefile \
+		install -D -m 644 debian/Makefile debian/$(pdkms)/usr/src/#TYPE#-#VERSION#/Makefile; \
 	fi
 
 	if [ -f "debian/dkms.append.conf" ]; then \
