@@ -215,7 +215,7 @@ ifneq (,$(filter #TYPE#-dkms,$(DOPACKAGES)))
 		install -D -m 644 debian/Makefile debian/$(pdkms)/usr/src/#TYPE#-#VERSION#/Makefile; \
 	fi
 
-	if [ -n "debian/$(pdkms)/usr/src/#TYPE#-#VERSION#/dkms.conf" ]; then \
+	if [ ! -f "debian/$(pdkms)/usr/src/#TYPE#-#VERSION#/dkms.conf" ]; then \
 		ln -s ./scripts/onload_misc/dkms.conf debian/$(pdkms)/usr/src/#TYPE#-#VERSION#/dkms.conf; \
 	fi
 	if [ -f "debian/dkms.append.conf" ]; then \
@@ -249,6 +249,11 @@ binary-indep: build install
 #	dh_installemacsen -i
 #	dh_installpam -i
 #	dh_installmime -i
+# Let dh_dkms generate dkms-aware maintainer scripts for the dkms subpackage
+# https://manpages.debian.org/buster/dkms/dh_dkms.1
+ifneq (,$(filter #TYPE#-dkms,$(DOPACKAGES)))
+	dh_dkms -p #TYPE#-dkms -- "$(if $(wildcard dkms.conf),dkms.conf,scripts/onload_misc/dkms.conf)"
+endif
 #	dh_installinit -i
 #	dh_installcron -i
 #	dh_installinfo -i
