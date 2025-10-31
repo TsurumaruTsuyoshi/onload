@@ -188,7 +188,11 @@ ifneq (,$(filter #TYPE#-source,$(DOPACKAGES)))
 	dh_installdirs -p$(psource)  usr/src/modules/$(sname)/debian
 
 	# Copy only the driver source to the proper location
-	cp Makefile  debian/$(psource)/usr/src/modules/$(sname)
+	if [ -f "debian/Makefile" ]; then \
+		cp debian/Makefile  debian/$(psource)/usr/src/modules/$(sname) \
+	else \
+		cp Makefile  debian/$(psource)/usr/src/modules/$(sname) \
+	fi
 	cp -r src  debian/$(psource)/usr/src/modules/$(sname)
 	cp -r scripts  debian/$(psource)/usr/src/modules/$(sname)
 	cp -r mk  debian/$(psource)/usr/src/modules/$(sname)
