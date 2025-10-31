@@ -222,11 +222,11 @@ ifneq (,$(filter #TYPE#-dkms,$(DOPACKAGES)))
 	 	cat debian/dkms.append.conf >> debian/$(pdkms)/usr/src/#TYPE#-#VERSION#/dkms.conf; \
 	fi
 
-	if command -v dquilt >/dev/null 2>&1 && [ -f $(CURDIR)/debian/patches/series ]; then \
+	if [ -f $(CURDIR)/debian/patches/series ]; then \
 		( cd debian/$(pdkms)/usr/src/#TYPE#-#VERSION# && \
 		  QUILT_PATCHES=$(CURDIR)/debian/patches \
 		  QUILT_SERIES=$(CURDIR)/debian/patches/series \
-		  dquilt push -a ); \
+		  quilt push -a ); \
 	fi
 endif
 
