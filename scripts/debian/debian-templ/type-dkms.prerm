@@ -1,4 +1,6 @@
 # SPDX-License-Identifier: BSD-2-Clause
 # SPDX-FileCopyrightText: (c) Copyright 2023 Advanced Micro Devices, Inc.
 
-dkms remove -m #TYPE# -v #VERSION#
+if dkms status -m #TYPE# -v #VERSION# >/dev/null 2>&1; then
+    dkms remove -m #TYPE# -v #VERSION# --all
+fi
