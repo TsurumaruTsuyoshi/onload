@@ -6,7 +6,8 @@ set -e
 
 case "$1" in
     triggered)
-        dkms autoinstall -m #TYPE# -v #VERSION# --force
+        dkms build -m #TYPE# -v #VERSION# --force
+        dkms install -m #TYPE# -v #VERSION# --force
         # HACK: Force initramfs update because x3522 package does not trigger it
         dpkg-trigger update-initramfs
     ;;

@@ -16,7 +16,7 @@ esac
 # Begin real processing below this line
 
 # In ther future, it's possible to extend this script to a split dkms-prefer package with something like
-# 
+#
 # CONF_FILE="/etc/initramfs-tools/dkms-prefer.modules"
 # # Read module list
 # MODULES_LIST=""
@@ -42,10 +42,11 @@ for mod in $MODULES_LIST; do
   # Does *any* DKMS file for this module exist (host filesystem)?
   if find "/lib/modules/${version}/updates/dkms" -maxdepth 1 -type f -name "${mod}.ko*" -print -quit | grep -q .; then
     # Copy all matching DKMS files into the image (no globbing in the shell)
-    find "/lib/modules/${version}/updates/dkms" -maxdepth 1 -type f -name "${mod}.ko*" -print0 \
-    | while IFS= read -r -d '' f; do
-        copy_file module "$f" "$DKMS_BASE/"
-      done
+    find "/lib/modules/${version}/updates/dkms" -maxdepth 1 -type f -name "${mod}.ko*" \
+    | while IFS= read -r f; do
+      [ -n "$f" ] && copy_file module "$f" "$DKMS_BASE/"
+    done
+
 
     # Remove any in-tree copies of the same module from the image
     if [ -d "$KERNEL_BASE" ]; then
